@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
   '';
 
   buildInputs = [
-	leiningen
-	emacs25pre
+    openjdk   # Just so we can test with java -jar xxx.jar
+  	leiningen
   ];
 }
