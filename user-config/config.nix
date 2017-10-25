@@ -21,6 +21,15 @@ set shiftwidth=2
 
 syntax on
 set bg=dark
+
+set hidden
+set hlsearch
+
+" windmoves, in normal mode only
+nmap <S-Up> <C-w>k
+nmap <S-Down> <C-w>j
+nmap <S-Left> <C-w>h
+nmap <S-Right> <C-w>l
 '';
 
       vimrcConfig.vam = {
