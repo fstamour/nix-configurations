@@ -4,6 +4,8 @@
 
   imports = [ ./local.nix ];
 
+  allowUnfree = true; # For dropbox
+
   vim.python = true;
 
   packageOverrides = pkgs_: with pkgs_; {
@@ -15,9 +17,13 @@
 set tabstop=2
 set expandtab
 set shiftwidth=2
+set clipboard=unnamed
 
-" Save and run the current file on F5
-" nmap <F5> <ESC>:w \|\| :! ./% <CR>
+" don't forget to mkdir that file
+set directory=$HOME/.vim/swapfile//
+
+set number
+set relativenumber
 
 syntax on
 set bg=dark
@@ -25,11 +31,31 @@ set bg=dark
 set hidden
 set hlsearch
 
-" windmoves, in normal mode only
-nmap <S-Up> <C-w>k
-nmap <S-Down> <C-w>j
-nmap <S-Left> <C-w>h
-nmap <S-Right> <C-w>l
+let mapleader = " "
+
+" windows!
+map <leader>w <C-w>
+
+iabbrev sl ls
+iabbrev dc cd
+iabbrev teh the
+iabbrev paht path
+iabbrev PAHT PATH
+iabbrev lits list
+iabbrev lenght length
+iabbrev widht width
+iabbrev height heigth
+
+" insert date
+" imap <expr> //date strftime("%Y-%m-%d")
+
+" Type //sh or //bash to insert corresponding shebang
+" nmap //sh ggO#!/usr/bin/env sh<Esc><C-o>
+" nmap //bash ggO#!/usr/bin/env bash<Esc><C-o>
+
+""" <leader>c  Bindings for c programming
+" Switch between header and source files
+nmap <leader>cs :e %:p:s,.h$,.X123X,:s,.c$,.h,:s,.X123X$,.c,<CR>
 '';
 
       vimrcConfig.vam = {
@@ -37,14 +63,14 @@ nmap <S-Right> <C-w>l
         pluginDictionaries = [
           {names = [
               "Syntastic"
-              "youcompleteme"
-              "ctrlp"
-              "sensible"
               "colors-solarized"
+              "ctrlp"
+              "rainbow_parentheses"
+              "sensible"
               "vim-colorschemes"
               "vim-css-color"
               "vim-startify"
-              "rainbow_parentheses"
+              "youcompleteme"
            ];}
         ];
       };
@@ -56,6 +82,8 @@ nmap <S-Right> <C-w>l
       paths = [
         myVim
         emacs25
+
+        #lisp-quicklisp-2016-01-21
 
         # Spell-checking
         hunspell
