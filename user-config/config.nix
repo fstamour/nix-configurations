@@ -56,6 +56,14 @@ iabbrev height heigth
 """ <leader>c  Bindings for c programming
 " Switch between header and source files
 nmap <leader>cs :e %:p:s,.h$,.X123X,:s,.c$,.h,:s,.X123X$,.c,<CR>
+
+""" <leader>r  Bindings for rust programming
+" Format current file using rustfmt
+nmap <leader>rf :%!rustfmt<cr>
+" Run with cargo
+nmap <leader>rr :wa<cr>:!cargo run<cr>
+" Run tests with cargo
+nmap <leader>rt :wa<cr>:!cargo test<cr>
 '';
 
       vimrcConfig.vam = {
