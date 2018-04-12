@@ -56,7 +56,7 @@
     tree
     unzip
     wget
-    zsh 
+    zsh
   ] ++ [
     # Windows interop
     ntfs3g # In order to mount NTFS with rw
@@ -87,29 +87,31 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
     videoDrivers = [ "nvidia" ];
     layout = "us";
-    synaptics = {
-      enable = true;
-    };
+    # synaptics.enable = true;
     exportConfiguration = true;
   };
   # services.xserver.xkbOptions = "eurosign:e";
 
   # Enable the KDE Desktop Environment.
-  # services.xserver.displayManager.kdm.enable = true;
-  # services.xserver.desktopManager.kde4.enable = true;
+  # services.xserver.displayManager.plasma5.enable = true;
+  services.xserver.desktopManager.gnome3.enable = true;
   # services.xserver.desktopManager.xfce.enable = true;
-  services.xserver.windowManager.stumpwm.enable = true;
+  # services.xserver.windowManager.stumpwm.enable = true;
 
   # Enable power management service
   services.tlp.enable = true;
+
+  services.syncthing = {
+    enable = true;
+    user = "mpsyco";
+    dataDir = "/home/mpsyco/.syncthing";
+    openDefaultPorts = true;
+  };
 
   users.defaultUserShell = "/run/current-system/sw/bin/fish";
 
@@ -117,13 +119,15 @@
   users.extraUsers.mpsyco = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "power" "docker" ];
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "17.09";
-  system.autoUpgrade.enable = true;
-
+  system.stateVersion = "18.03";
+  system.autoUpgrade = {
+    enable = true;
+    channel = https://nixos.org/channels/nixos-18.03;
+  };
 
   services.emacs = {
     enable = true;
@@ -131,4 +135,5 @@
   };
 
   virtualisation.virtualbox.host.enable = true;
+  virtualisation.docker.enable = true;
 }
