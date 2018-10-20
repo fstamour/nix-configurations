@@ -5,97 +5,169 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      # Things that are specific to this computer.
-      # TODO Move some things in there.
-      ./local-configuration.nix
-    ];
+# Include the results of the hardware scan.
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
-  # Use the GRUB 2 boot loader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  # Define on which hard drive you want to install Grub.
-  boot.loader.grub.device = "/dev/sda";
+# For nvidia graphic card drivers
+  nixpkgs.config.allowUnfree = true;
 
-  networking.hostName = "lambda"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+# Enable PulseAudio.
+  hardware.pulseaudio.enable = true;
 
-  # Select internationalisation properties.
+# Use the gummiboot efi boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+# Select internationalisation properties.
   i18n = {
     consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "us";
     defaultLocale = "en_US.UTF-8";
+# Provide Japanese Input. Why not?
+    inputMethod.ibus.engines = [ pkgs.ibus-anthy pkgs.mozc ];
   };
 
-  # Set your time zone.
+# Set your time zone.
   time.timeZone = "America/Montreal";
 
-  # For nvidia's proprietary drivers.
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
+# List packages installed in system profile. To search by name, run:
+# $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    wget
-    emacs
-    firefox
-    gitAndTools.gitFull
-    mercurialFull
-    libreoffice
-    cmake
-    gnumake
     screen
-    sqlite
-    # stumpwm-git
-    rlwrap
+    gitAndTools.gitFull
+    fish
+    file
+    moreutils # Sponge at least...
     tree
-    # vimHugeX
-    xscreensaver
-    zsh
-
-    unzip
-
-    ntfs3g # In order to mount NTFS with rw
+    vim
+    w3m
+    wget
+  ] ++ [
+    tmux
+    ranger
+    fd
+    ripgrep
+  ] ++ [
+    lsof
+    iotop
+    htop
+    pv
+  ] ++ [
+    firefox
+    vlc
+    pavucontrol
   ];
 
-  # List services that you want to enable:
+  environment.variables = {
+    EDITOR = "vim";
+  };
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  programs = {
+    bash.enableCompletion = true;
+    fish.enable = true;
+    wireshark = { 
+      enable = true;
+      package = pkgs.wireshark-gtk;
+    };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+    ssh = {
+      startAgent = true;
+    };
+  };
 
-  # Enable the X11 windowing system.
+# List services that you want to enable:
+
+  services = {
+# See https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/audio/mpd.nix
+    mpd = {
+      enable = true;
+# musicDirectory = 
+    };
+
+# Enable the OpenSSH daemon.
+    openssh = {
+      enable = true;
+      passwordAuthentication = false;
+    };
+
+# Windows share access
+    samba = {
+      enable = true;
+      nsswins = true;
+    };
+
+# Synchting
+    syncthing = {
+      enable = true; 
+      user = "mpsyco"; 
+      dataDir = "/home/mpsyco/.config/syncthing";
+      openDefaultPorts = true;
+    };
+  };
+
+# Network security
+  networking.firewall.allowPing = true;
+  networking.firewall.allowedTCPPorts = [ 445 139 7777 ];
+  networking.firewall.allowedUDPPorts = [ 137 138 7777 ];
+
+  networking.hostName = "mu"; # Define your hostname.
+  networking.hostId = "D40F09C6";  # Random 32-bit identifier
+
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts
+    dina-font
+    proggyfonts
+  ];
+
+# Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "us";
   services.xserver.videoDrivers = [ "nvidia" ];
-  # hardware.opengl.driSupport32bit = true;
-  # services.xserver.xkbOptions = "eurosign:e";
+# services.xserver.xkbOptions = "eurosign:e";
 
-  # Enable the KDE Desktop Environment.
-  # services.xserver.displayManager.kdm.enable = true;
-  # services.xserver.desktopManager.kde4.enable = true;
-  services.xserver.desktopManager.xfce.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.extraUsers.guest = {
-  #   isNormalUser = true;
-  #   uid = 1000;
-  # };
+  services.xserver.displayManager.sddm.enable = true;
+# services.xserver.desktopManager.kde5.enable = true;
+  services.xserver.desktopManager.gnome3.enable = true;
+  services.xserver.windowManager.stumpwm.enable = true; # TODO Try this.
+
+  users.defaultUserShell = "/run/current-system/sw/bin/fish";
+
+# Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.mpsyco = {
-    isNormalUser = true;
-    uid = 1000;
     createHome = true;
-    extraGroups = [ "wheel" ];
+    home = "/home/mpsyco";
+    isNormalUser = true;
+    extraGroups = [ 
+      "wheel" # Sudo rights
+      "dialout" # In order to access /dev/ttyUSBx for hardware dev.
+      "docker"
+      "wireshark"
+    ];
+    uid = 1000;
   };
 
-  # Install virtualbox
-  virtualisation.virtualbox.host.enable = true;
+# The NixOS release to be compatible with for stateful data such as databases.
+    system.stateVersion = "18.09";
+    system.autoUpgrade = {
+      enable = true;
+      channel = https://nixos.org/channels/nixos-18.09;
+    };
 
-  # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "16.03";
+# Virtualisation
+    virtualisation.libvirtd.enable = true;
+    virtualisation.virtualbox.host.enable = true;
+    virtualisation.docker.enable = true;
 
+# For steam
+    hardware.opengl.driSupport32Bit = true;
+    hardware.pulseaudio.support32Bit = true;
 }
