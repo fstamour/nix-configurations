@@ -45,34 +45,37 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     # Command line goodies
-    screen
+    bat # file viewer
+    fd # alternative to "find"
+    file # determine file type
+    fish # friendly shell
+    fzf # fuzzy finder
     gitAndTools.gitFull
-    file
-    fish
-    htop
-    rlwrap
-    tmux
-    tree
+    htop # process viewer
+    pv # pipe viewer
+    ranger # file explorer
+    ripgrep # find in file
+    rlwrap # for shell that doesn't have readline (e.g. sbcl)
+    screen # terminal multiplexer
+    tig # text-mode interface for git
+    tmux # terminal multiplexer
+    tree # ls in tree-like format
     unzip
-    wget
-    zsh
+    w3m # terminal web browser
+    wget # download stuff
   ] ++ [
     # Windows interop
     ntfs3g # In order to mount NTFS with rw
   ] ++ [
     # Editors
     emacs
-    kakoune
+    kakoune # alternative to vim
     vim
   ] ++ [
     # Diagnostic tools
-    lsof
-    usbutils
-  ] ++ [
-    # GUI stuff
-    firefox
-    vlc
-    pavucontrol
+    lsof # to find which process has which file opened
+    usbutils # e.g. list usb devices
+    bind # e.g. nslookup
   ];
 
   programs = {

@@ -4,12 +4,13 @@
 
   imports = [ ./local.nix ];
 
-  allowUnfree = true; # For dropbox
+  allowUnfree = true; # For Discord
 
   vim.python = true;
 
   packageOverrides = pkgs_: with pkgs_; {
 
+# see https://nixos.wiki/wiki/Vim
     myVim = vim_configurable.customize {
       name = "vim";
 
@@ -94,19 +95,64 @@ nmap <leader>rt :wa<cr>:!cargo test<cr>
       name = "myPackages";
       paths = [
         myVim
-        emacs25
-
-        #lisp-quicklisp-2016-01-21
 
         # Spell-checking
         hunspell
         hunspellDicts.fr-moderne
         hunspellDicts.fr-any
         hunspellDicts.en-gb-ize
-        # hunspellDicts.es-cu
+        hunspellDicts.es-cu
 
-        # asciinema is a tool to record (and share) terminal sessions
-        asciinema
+        asciinema # tool to record (and share) terminal sessions
+        youtube-dl # download stuff from youtube
+
+        # chat
+        discord
+      ] ++ [
+        # machine learning
+        octave
+        tesseract
+
+        # constaint programming
+        minizinc
+        gecode
+
+        # formal methods
+        tlaplusToolbox
+      ] ++ [
+        # clojure
+        boot
+        clojure
+
+        # rust
+        cargo
+
+        # javascript
+        nodejs
+
+        # lisp
+        lispPackages.quicklisp
+        ccl
+
+        # general
+        gnumake
+        gdb
+        ctags
+        cmake
+      ] ++ [
+        # GUI stuff
+        anki # space-repition something, I forgot..l
+        chromium # shiny web browser
+        firefox # foxy web browser
+        freemind # mind map
+        freerdp # remote desktop (gui)
+        keepassx2 # password manager
+        libreoffice # office suite
+        pavucontrol # sound settings
+        termite # terminal
+        vlc # video player
+        wxcam # webcam
+        xorg.xev # print x event ids
       ];
     };
   };
