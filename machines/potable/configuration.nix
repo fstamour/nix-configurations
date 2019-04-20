@@ -1,6 +1,4 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# the NixOS manual is accessible by running ‘nixos-help’.
 
 { config, pkgs, ... }:
 
@@ -9,7 +7,13 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+
   hardware.opengl.driSupport32Bit = true;
+  # Install pulseaudio explicitly to have sound with stumpwm
+  hardware.pulseaudio = {
+    enable = true;
+    support32Bit = true;
+  };
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub = {
@@ -26,21 +30,16 @@
   };
 
   networking.hostName = "potable"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
 
-  # Select internationalisation properties.
-  # i18n = {
-  #   consoleFont = "Lat2-Terminus16";
-  #   consoleKeyMap = "us";
-  #   defaultLocale = "en_US.UTF-8";
-  # };
+  # For development
+  networking.firewall.allowedTCPPorts = [ 8000 ];
 
   # Set your time zone.
   time.timeZone = "America/Montreal";
 
   # For nvidia's proprietary drivers.
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -68,6 +67,7 @@
   ] ++ [
     # Diagnostic tools
     lsof
+    usbutils
   ] ++ [
     # GUI stuff
     firefox
@@ -77,7 +77,6 @@
 
   programs = {
     bash.enableCompletion = true;
-    zsh.enable = true;
     fish.enable = true;
     ssh.startAgent = true;
   };
@@ -90,18 +89,23 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    videoDrivers = [ "nvidia" ];
+    # videoDrivers = [ "nvidia" ]; # disabled because it doesn't support wayland (which is enabled by gdm)
     layout = "us";
-    # synaptics.enable = true;
+    # this is incompatible with gnome, but the trackpad doesn't work without it in with stumpwm, go figure
+    synaptics.enable = true;
     exportConfiguration = true;
   };
-  # services.xserver.xkbOptions = "eurosign:e";
 
-  # Enable the KDE Desktop Environment.
-  # services.xserver.displayManager.plasma5.enable = true;
-  services.xserver.desktopManager.gnome3.enable = true;
-  # services.xserver.desktopManager.xfce.enable = true;
-  # services.xserver.windowManager.stumpwm.enable = true;
+  # Use CapsLock as a compose key
+  services.xserver.xkbOptions = "compose:caps";
+
+  # Login screen
+  services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.displayManager.sddm.enable = true; # alternative (I've had problems with gdm)
+
+  # Window/Desktop manager
+  # services.xserver.desktopManager.gnome3.enable = true;
+  services.xserver.windowManager.stumpwm.enable = true;
 
   # Enable power management service
   services.tlp.enable = true;
@@ -119,14 +123,21 @@
   users.extraUsers.mpsyco = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "networkmanager" "power" "docker" ];
+    extraGroups = [
+      "dialout" # In order to access /dev/ttyUSBx for hardware dev.
+      "wheel"
+      "networkmanager"
+      "power"
+      "docker"
+      "adbusers"
+    ];
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "18.03";
+  system.stateVersion = "19.03";
   system.autoUpgrade = {
     enable = true;
-    channel = https://nixos.org/channels/nixos-18.03;
+    channel = https://nixos.org/channels/nixos-19.03;
   };
 
   services.emacs = {
