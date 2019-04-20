@@ -14,6 +14,8 @@
       name = "vim";
 
       vimrcConfig.customRC = ''
+set encoding=utf-8
+
 set tabstop=2
 set expandtab
 set shiftwidth=2
