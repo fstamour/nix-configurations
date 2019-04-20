@@ -21,7 +21,7 @@ set expandtab
 set shiftwidth=2
 set clipboard=unnamed
 
-" don't forget to mkdir that file
+" don't forget to mkdir that folder
 set directory=$HOME/.vim/swapfile//
 
 set number
@@ -37,6 +37,9 @@ let mapleader = " "
 
 " windows!
 map <leader>w <C-w>
+
+" Highlight trailing whitespaces
+match Todo /\s\+$/
 
 iabbrev sl ls
 iabbrev dc cd
