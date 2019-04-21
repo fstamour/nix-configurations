@@ -148,6 +148,24 @@
     install = true;
   };
 
+  services.mpd = {
+    enable = true;
+    user = "mpsyco";
+    group = "users";
+    dataDir = "/home/mpsyco/mpd";
+    extraConfig = ''
+      audio_output {
+        type "alsa"
+        name "My ALSA Device"
+        mixer_device "default"
+        mixer_control "Master"
+      }
+
+      # disable "resume playback" on startup
+      restore_paused "yes"
+      '';
+  };
+
   virtualisation.virtualbox.host.enable = true;
   virtualisation.docker.enable = true;
 }
