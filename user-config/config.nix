@@ -143,12 +143,15 @@ nmap <leader>rt :wa<cr>:!cargo test<cr>
         # GUI stuff
         anki # space-repition something, I forgot..l
         chromium # shiny web browser
+        copyq # clipboard manager
+        evince # document viewer
         firefox # foxy web browser
         freemind # mind map
         freerdp # remote desktop (gui)
         keepassx2 # password manager
         libreoffice # office suite
         pavucontrol # sound settings
+        shutter # for screenshots
         termite # terminal
         vlc # video player
         wxcam # webcam
