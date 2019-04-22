@@ -99,6 +99,16 @@
     exportConfiguration = true;
   };
 
+  services.compton = {
+    enable = true;
+
+    shadow = true;
+    shadowOpacity = "0.5";
+    inactiveOpacity = "0.8";
+    fade = true;
+    fadeDelta = 5; # in ms, default is 10
+  };
+
   # Use CapsLock as a compose key
   services.xserver.xkbOptions = "compose:caps";
 
