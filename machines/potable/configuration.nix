@@ -126,7 +126,7 @@
   services.syncthing = {
     enable = true;
     user = "mpsyco";
-    dataDir = "/home/mpsyco/.syncthing";
+    configDir = "/home/mpsyco/.syncthing";
     openDefaultPorts = true;
   };
 
