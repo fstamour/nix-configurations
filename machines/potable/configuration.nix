@@ -39,7 +39,7 @@
   time.timeZone = "America/Montreal";
 
   # For nvidia's proprietary drivers.
-  # nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -92,7 +92,7 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    # videoDrivers = [ "nvidia" ]; # disabled because it doesn't support wayland (which is enabled by gdm)
+    videoDrivers = [ "nvidia" ];
     layout = "us";
     # this is incompatible with gnome, but the trackpad doesn't work without it in with stumpwm, go figure
     synaptics.enable = true;
@@ -113,7 +113,10 @@
   services.xserver.xkbOptions = "compose:caps";
 
   # Login screen
-  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm = {
+    enable = true;
+    wayland = false; # because nvidia drivers doesn't support wayland
+  };
   # services.xserver.displayManager.sddm.enable = true; # alternative (I've had problems with gdm)
 
   # Window/Desktop manager
