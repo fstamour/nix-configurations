@@ -16,6 +16,7 @@
 
       vimrcConfig.customRC = ''
 set encoding=utf-8
+set shell=/bin/sh
 
 set tabstop=2
 set expandtab
