@@ -32,8 +32,7 @@
 # Set your time zone.
   time.timeZone = "America/Montreal";
 
-# List packages installed in system profile. To search by name, run:
-# $ nix-env -qaP | grep wget
+# List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     screen
     gitAndTools.gitFull
@@ -67,7 +66,7 @@
   programs = {
     bash.enableCompletion = true;
     fish.enable = true;
-    wireshark = { 
+    wireshark = {
       enable = true;
       package = pkgs.wireshark-gtk;
     };
@@ -83,7 +82,7 @@
 # See https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/audio/mpd.nix
     mpd = {
       enable = true;
-# musicDirectory = 
+# musicDirectory =
     };
 
 # Enable the OpenSSH daemon.
@@ -100,8 +99,8 @@
 
 # Synchting
     syncthing = {
-      enable = true; 
-      user = "mpsyco"; 
+      enable = true;
+      user = "mpsyco";
       dataDir = "/home/mpsyco/.config/syncthing";
       openDefaultPorts = true;
     };
@@ -135,9 +134,8 @@
 
 
   services.xserver.displayManager.sddm.enable = true;
-# services.xserver.desktopManager.kde5.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;
-  services.xserver.windowManager.stumpwm.enable = true; # TODO Try this.
+  services.xserver.windowManager.stumpwm.enable = true;
 
   users.defaultUserShell = "/run/current-system/sw/bin/fish";
 
@@ -146,7 +144,7 @@
     createHome = true;
     home = "/home/mpsyco";
     isNormalUser = true;
-    extraGroups = [ 
+    extraGroups = [
       "wheel" # Sudo rights
       "dialout" # In order to access /dev/ttyUSBx for hardware dev.
       "docker"
@@ -159,7 +157,7 @@
     system.stateVersion = "18.09";
     system.autoUpgrade = {
       enable = true;
-      channel = https://nixos.org/channels/nixos-18.09;
+      channel = https://nixos.org/channels/nixos-19.03;
     };
 
 # Virtualisation
