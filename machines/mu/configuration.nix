@@ -20,6 +20,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+# Enable support for SANE scanners
+  hardware.sane.enable = true;
+
 # Select internationalisation properties.
   i18n = {
     consoleFont = "Lat2-Terminus16";
@@ -39,14 +42,20 @@
     fish
     file
     moreutils # Sponge at least...
+    rlwrap
     tree
     vim
     w3m
     wget
   ] ++ [
+    # Specific to "mu"
+    refind
+  ] ++ [
+    bat
     tmux
     ranger
     fd
+    fzf
     ripgrep
   ] ++ [
     lsof
@@ -66,10 +75,11 @@
   programs = {
     bash.enableCompletion = true;
     fish.enable = true;
-    wireshark = {
-      enable = true;
-      package = pkgs.wireshark-gtk;
-    };
+    # not compatible with 19.09
+    # wireshark = {
+    #   enable = true;
+    #   package = pkgs.wireshark-gtk;
+    # };
 
     ssh = {
       startAgent = true;
@@ -149,6 +159,9 @@
       "dialout" # In order to access /dev/ttyUSBx for hardware dev.
       "docker"
       "wireshark"
+      "cdrom" # for burning cd
+      "scanner"
+      "lp" # printer
     ];
     uid = 1000;
   };
