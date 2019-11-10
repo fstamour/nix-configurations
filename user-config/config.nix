@@ -120,6 +120,7 @@ nmap <leader>rt :wa<cr>:!cargo test<cr>
 
         # formal methods
         tlaplusToolbox
+        tetex # for pretty-printing TLA specs
       ] ++ [
         # clojure
         boot
