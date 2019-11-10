@@ -40,6 +40,7 @@
 
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
+     btrfsProgs
      bat
      file
      git
@@ -70,9 +71,10 @@
 
   services.syncthing = {
     enable = true;
-    user = "mpsyco";
+    user = "shared";
+    group = "users";
     # configDir = "/home/mpsyco/.config/syncthig";
-    dataDir = "/home/mpsyco/.config/syncthing";
+    dataDir = "/home/shared/.config/syncthing";
     openDefaultPorts = true;
   };
 
