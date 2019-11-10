@@ -133,7 +133,6 @@ nmap <leader>rt :wa<cr>:!cargo test<cr>
         nodejs
 
         # lisp
-        lispPackages.quicklisp
         ccl
 
         # general
