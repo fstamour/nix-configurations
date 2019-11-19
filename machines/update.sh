@@ -18,7 +18,7 @@ function header() {
 for machine in epsilon mu potable; do
   header $machine
   if [ $machine = $(hostname) ]; then
-    run cp /etc/nixos/configuration.nix $machine
+    run cp -r /etc/nixos/* $machine/
   else
     run rsync -vr ${machine}:/etc/nixos/ ${machine}/
   fi

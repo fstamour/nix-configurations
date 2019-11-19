@@ -85,7 +85,7 @@ nmap <leader>rt :wa<cr>:!cargo test<cr>
               "vim-colorschemes"
               "vim-css-color"
               "vim-startify"
-              "youcompleteme"
+              # "youcompleteme"
            ];}
         ];
       };
@@ -109,9 +109,10 @@ nmap <leader>rt :wa<cr>:!cargo test<cr>
 
         # chat
         discord
+        weechat
       ] ++ [
         # machine learning
-        octave
+        # octave # on 19.09, it requires the qscintilla package which is markedd as broken
         tesseract
 
         # constaint programming
@@ -120,6 +121,7 @@ nmap <leader>rt :wa<cr>:!cargo test<cr>
 
         # formal methods
         tlaplusToolbox
+        tetex # for pretty-printing TLA specs
       ] ++ [
         # clojure
         boot
@@ -132,7 +134,6 @@ nmap <leader>rt :wa<cr>:!cargo test<cr>
         nodejs
 
         # lisp
-        lispPackages.quicklisp
         ccl
 
         # general
@@ -142,7 +143,7 @@ nmap <leader>rt :wa<cr>:!cargo test<cr>
         cmake
       ] ++ [
         # GUI stuff
-        anki # space-repition something, I forgot..l
+        anki # space-repition something, I forgot...
         chromium # shiny web browser
         copyq # clipboard manager
         evince # document viewer

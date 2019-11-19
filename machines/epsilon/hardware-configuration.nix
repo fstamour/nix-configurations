@@ -8,10 +8,10 @@
     [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
     ];
 
+  # boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "sd_mod" ];
   boot.initrd.availableKernelModules = [ "ahci" "ohci_pci" "ehci_pci" "pata_atiixp" "usb_storage" "ums_realtek" "sd_mod" "sr_mod" ];
-  boot.kernelModules = [ "kvm-amd" ];
-  # boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-  # boot.kernelModules = [ "kvm-intel" ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
@@ -19,18 +19,20 @@
       fsType = "ext4";
     };
 
-#  fileSystems."/boot" =
-#    { device = "/dev/disk/by-uuid/6894-E520";
-#      fsType = "vfat";
-#    };
-
- # P.S. The system will fail to boot if "tank" is not plugged in.
- fileSystems."/share" =
+  # P.S. The system will fail to boot if "tank" is not plugged in.
+  fileSystems."/share" =
     { device = "tank";
       fsType = "zfs";
+    };
+
+  fileSystems."/butter" =
+    { device = "/dev/disk/by-uuid/00b61609-2829-4f7a-b3ca-7c47aea77752";
+      fsType = "btrfs";
     };
 
   swapDevices = [ { device = "/var/swapfile"; size = 2048; } ];
 
   nix.maxJobs = lib.mkDefault 2;
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }
+
