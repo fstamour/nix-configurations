@@ -63,9 +63,11 @@
     htop
     pv
   ] ++ [
+    calibre kindlegen
     firefox
     vlc
     pavucontrol
+    xclip
   ];
 
   environment.variables = {
