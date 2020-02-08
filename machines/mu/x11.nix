@@ -3,6 +3,7 @@
 
 {
   environment.systemPackages = with pkgs; [
+    arandr
     dmenu
     firefox
     pavucontrol
