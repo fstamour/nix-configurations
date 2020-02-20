@@ -7,13 +7,13 @@ stdenv.mkDerivation rec {
   name = "machineLearningNotebook";
   env = buildEnv { name = name; paths = buildInputs; };
   buildInputs = [
-    python36Packages.notebook
-    python36Packages.numpy
-    python36Packages.scipy
-    python36Packages.scikitlearn
-    python36Packages.scikitimage
-    python36Packages.matplotlib
-    python36Packages.seaborn # high-level interface for matplotlib
+    python37Packages.notebook
+    python37Packages.numpy
+    python37Packages.scipy
+    python37Packages.scikitlearn
+    python37Packages.scikitimage
+    python37Packages.matplotlib
+    python37Packages.seaborn # high-level interface for matplotlib
   ];
 }
 

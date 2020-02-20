@@ -7,7 +7,7 @@ stdenv.mkDerivation rec {
   name = "python3Notebook";
   env = buildEnv { name = name; paths = buildInputs; };
   buildInputs = [
-    python36Packages.notebook
+    python37Packages.notebook
   ];
 }
 
