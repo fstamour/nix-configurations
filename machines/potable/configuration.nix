@@ -141,11 +141,11 @@
     uid = 1000;
     extraGroups = [
       "dialout" # In order to access /dev/ttyUSBx for hardware dev.
-      "wheel"
+      "wheel" # sudoer
       "networkmanager"
       "power"
       "docker"
-      "adbusers"
+      "adbusers" # android develpment
     ];
   };
 
