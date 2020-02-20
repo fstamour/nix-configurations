@@ -6,6 +6,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./mpd.nix
     ];
 
   hardware.opengl.driSupport32Bit = true;
@@ -52,6 +53,7 @@
     fzf # fuzzy finder
     gitAndTools.gitFull
     htop # process viewer
+    moreutils # sponge, ts, etc
     pv # pipe viewer
     ranger # file explorer
     ripgrep # find in file
@@ -96,6 +98,7 @@
     layout = "us";
     # this is incompatible with gnome, but the trackpad doesn't work without it in with stumpwm, go figure
     synaptics.enable = true;
+    # libinput.enable = true;
     exportConfiguration = true;
   };
 
@@ -104,9 +107,10 @@
 
     shadow = true;
     shadowOpacity = "0.5";
-    inactiveOpacity = "0.8";
+    inactiveOpacity = "1.0";
     fade = true;
     fadeDelta = 5; # in ms, default is 10
+    vSync = true;
   };
 
   # Use CapsLock as a compose key
@@ -161,22 +165,9 @@
     install = true;
   };
 
-  services.mpd = {
+  # Not tested yet
+  services.factorio = {
     enable = true;
-    user = "mpsyco";
-    group = "users";
-    dataDir = "/home/mpsyco/mpd";
-    extraConfig = ''
-      audio_output {
-        type "alsa"
-        name "My ALSA Device"
-        mixer_device "default"
-        mixer_control "Master"
-      }
-
-      # disable "resume playback" on startup
-      restore_paused "yes"
-      '';
   };
 
   virtualisation.virtualbox.host.enable = true;
