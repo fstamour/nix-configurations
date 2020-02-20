@@ -24,6 +24,7 @@
   };
   boot.supportedFilesystems = [ "zfs" ];
 
+
   networking.hostName = "epsilon"; # Define your hostname.
   networking.hostId = "D40F09C5";  # Random 32-bit identifier
   networking.firewall.allowPing = true;
@@ -77,6 +78,8 @@
     dataDir = "/home/shared/.config/syncthing";
     openDefaultPorts = true;
   };
+  # increase the number of watches for syncthing
+  boot.kernel.sysctl."fs.inotify.max_user_watches" = 204800;
 
   users.defaultUserShell = "/run/current-system/sw/bin/fish";
 
