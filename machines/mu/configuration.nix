@@ -58,9 +58,6 @@
       nsswins = true;
     };
 
-   # Start the urxvtd user service
-   urxvtd.enable = true;
-
 # Synchting
     syncthing = {
       enable = true;
