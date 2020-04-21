@@ -8,6 +8,9 @@
 # Include the results of the hardware scan.
   imports = [
     ./hardware-configuration.nix
+    ./cuda.nix
+    ./packages.nix
+    ./x11.nix
   ];
 
 # For nvidia graphic card drivers
@@ -17,8 +20,16 @@
   hardware.pulseaudio.enable = true;
 
 # Use the gummiboot efi boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    resumeDevice = "/swapfile";
+  };
+
+# Enable support for SANE scanners
+  hardware.sane.enable = true;
 
 # Select internationalisation properties.
   i18n = {
@@ -32,60 +43,9 @@
 # Set your time zone.
   time.timeZone = "America/Montreal";
 
-# List packages installed in system profile. To search by name, run:
-# $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-    screen
-    gitAndTools.gitFull
-    fish
-    file
-    moreutils # Sponge at least...
-    tree
-    vim
-    w3m
-    wget
-  ] ++ [
-    tmux
-    ranger
-    fd
-    ripgrep
-  ] ++ [
-    lsof
-    iotop
-    htop
-    pv
-  ] ++ [
-    firefox
-    vlc
-    pavucontrol
-  ];
-
-  environment.variables = {
-    EDITOR = "vim";
-  };
-
-  programs = {
-    bash.enableCompletion = true;
-    fish.enable = true;
-    wireshark = { 
-      enable = true;
-      package = pkgs.wireshark-gtk;
-    };
-
-    ssh = {
-      startAgent = true;
-    };
-  };
 
 # List services that you want to enable:
-
   services = {
-# See https://github.com/NixOS/nixpkgs/blob/master/nixos/modules/services/audio/mpd.nix
-    mpd = {
-      enable = true;
-# musicDirectory = 
-    };
-
 # Enable the OpenSSH daemon.
     openssh = {
       enable = true;
@@ -100,8 +60,8 @@
 
 # Synchting
     syncthing = {
-      enable = true; 
-      user = "mpsyco"; 
+      enable = true;
+      user = "mpsyco";
       dataDir = "/home/mpsyco/.config/syncthing";
       openDefaultPorts = true;
     };
@@ -115,29 +75,17 @@
   networking.hostName = "mu"; # Define your hostname.
   networking.hostId = "D40F09C6";  # Random 32-bit identifier
 
-  fonts.fonts = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    liberation_ttf
-    fira-code
-    fira-code-symbols
-    mplus-outline-fonts
-    dina-font
-    proggyfonts
-  ];
+  environment.variables = {
+    EDITOR = "vim";
+  };
 
-# Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  services.xserver.videoDrivers = [ "nvidia" ];
-# services.xserver.xkbOptions = "eurosign:e";
-
-
-  services.xserver.displayManager.sddm.enable = true;
-# services.xserver.desktopManager.kde5.enable = true;
-  services.xserver.desktopManager.gnome3.enable = true;
-  services.xserver.windowManager.stumpwm.enable = true; # TODO Try this.
+  programs = {
+    bash.enableCompletion = true;
+    fish.enable = true;
+    ssh = {
+      startAgent = true;
+    };
+  };
 
   users.defaultUserShell = "/run/current-system/sw/bin/fish";
 
@@ -146,11 +94,14 @@
     createHome = true;
     home = "/home/mpsyco";
     isNormalUser = true;
-    extraGroups = [ 
+    extraGroups = [
       "wheel" # Sudo rights
       "dialout" # In order to access /dev/ttyUSBx for hardware dev.
       "docker"
       "wireshark"
+      "cdrom" # for burning cd
+      "scanner"
+      "lp" # printer
     ];
     uid = 1000;
   };
@@ -159,7 +110,7 @@
     system.stateVersion = "18.09";
     system.autoUpgrade = {
       enable = true;
-      channel = https://nixos.org/channels/nixos-18.09;
+      channel = https://nixos.org/channels/nixos-19.03;
     };
 
 # Virtualisation

@@ -1,13 +1,10 @@
-#!/usr/bin/env nix-shell
-#!nix-shell ./android.nix
-
 with import <nixpkgs> {};
-
 stdenv.mkDerivation rec {
   name = "env";
   env = buildEnv { name = name; paths = buildInputs; };
   buildInputs = [
-    # android-sdk
-    android-studio-stable
+    avrdude
+    # avrgcclib # doesn't exists on 19.09 anymore
+    simavr
   ];
 }

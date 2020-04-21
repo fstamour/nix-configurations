@@ -4,22 +4,26 @@
 
   imports = [ ./local.nix ];
 
-  allowUnfree = true; # For dropbox
+  allowUnfree = true; # For Discord
 
   vim.python = true;
 
   packageOverrides = pkgs_: with pkgs_; {
 
+# see https://nixos.wiki/wiki/Vim
     myVim = vim_configurable.customize {
       name = "vim";
 
       vimrcConfig.customRC = ''
+set encoding=utf-8
+set shell=/bin/sh
+
 set tabstop=2
 set expandtab
 set shiftwidth=2
 set clipboard=unnamed
 
-" don't forget to mkdir that file
+" don't forget to mkdir that folder
 set directory=$HOME/.vim/swapfile//
 
 set number
@@ -35,6 +39,9 @@ let mapleader = " "
 
 " windows!
 map <leader>w <C-w>
+
+" Highlight trailing whitespaces
+match Todo /\s\+$/
 
 iabbrev sl ls
 iabbrev dc cd
@@ -78,7 +85,7 @@ nmap <leader>rt :wa<cr>:!cargo test<cr>
               "vim-colorschemes"
               "vim-css-color"
               "vim-startify"
-              "youcompleteme"
+              # "youcompleteme"
            ];}
         ];
       };
@@ -89,19 +96,68 @@ nmap <leader>rt :wa<cr>:!cargo test<cr>
       name = "myPackages";
       paths = [
         myVim
-        emacs25
-
-        #lisp-quicklisp-2016-01-21
 
         # Spell-checking
         hunspell
         hunspellDicts.fr-moderne
         hunspellDicts.fr-any
         hunspellDicts.en-gb-ize
-        # hunspellDicts.es-cu
+        hunspellDicts.es-cu
 
-        # asciinema is a tool to record (and share) terminal sessions
-        asciinema
+        asciinema # tool to record (and share) terminal sessions
+        youtube-dl # download stuff from youtube
+
+        # chat
+        discord
+        weechat
+      ] ++ [
+        # machine learning
+        # octave # on 19.09, it requires the qscintilla package which is markedd as broken
+        tesseract
+
+        # constaint programming
+        minizinc
+        gecode
+
+        # formal methods
+        tlaplusToolbox
+        tetex # for pretty-printing TLA specs
+      ] ++ [
+        # clojure
+        boot
+        clojure
+
+        # rust
+        cargo
+
+        # javascript
+        nodejs
+
+        # lisp
+        ccl
+
+        # general
+        gnumake
+        gdb
+        ctags
+        cmake
+      ] ++ [
+        # GUI stuff
+        anki # space-repition something, I forgot...
+        chromium # shiny web browser
+        copyq # clipboard manager
+        evince # document viewer
+        firefox # foxy web browser
+        freemind # mind map
+        freerdp # remote desktop (gui)
+        keepassx2 # password manager
+        libreoffice # office suite
+        pavucontrol # sound settings
+        shutter # for screenshots
+        termite # terminal
+        vlc # video player
+        wxcam # webcam
+        xorg.xev # print x event ids
       ];
     };
   };
