@@ -9,7 +9,7 @@ stdenv.mkDerivation rec {
   src = fetchgit {
     url = "https://github.com/syl20bnr/spacemacs.git";
     rev = "9f9faa404e3dec3e08cc73cf7b5a0439fc309800";
-    sha256 = "06sxw5v6im71dzk7kr7lf9mkwrz2jfx9cfrysy7x8c99m08xdasz";
+    sha256 = "1hr4niq0c4p08ikjm7v2i2xbd2bjlldcgibzjssl1gsd4xzxnqkg";
   };
 
   phases = "packagePhase";
