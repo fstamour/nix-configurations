@@ -7,7 +7,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./packages.nix
-      ./x11.nix
+      ./common/x11.nix
       ./x11-potable.nix
       ./mpd.nix
     ];

@@ -10,7 +10,7 @@
     ./hardware-configuration.nix
     ./cuda.nix
     ./packages.nix
-    ./x11.nix
+    ./common/x11.nix
   ];
 
 # For nvidia graphic card drivers

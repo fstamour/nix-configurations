@@ -25,7 +25,6 @@ for machine in epsilon mu potable; do
 		  grep -v $hard) $machine/
   else
     run rsync --exclude=$hard -vr ${machine}:/etc/nixos/ ${machine}/
-
   fi
 done
 
