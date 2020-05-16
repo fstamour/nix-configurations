@@ -3,13 +3,29 @@
 
 {
   environment.systemPackages = with pkgs; [
-    arandr
-    calibre kindlegen
-    dmenu
-    firefox
-    pavucontrol
-    vlc
-    xlockmore
+    anki # space-repetition something, I forgot...
+    arandr # display layout tool
+    calibre kindlegen # ebook tools
+    chromium # shiny web browser
+    copyq # clipboard manager
+    dmenu # dynamic menu
+    evince # document viewer
+    firefox # foxy web browser
+    freemind # mind map
+    freerdp # remote desktop (gui)
+    keepassx2 # password manager
+    libreoffice # office suite
+    lxappearance # tweak gtk theme (appearance)
+    pavucontrol # audio control
+    pavucontrol # sound settings
+    shutter # for screenshots
+    stumpish
+    termite # terminal emulator
+    vlc # media player
+    wxcam # webcam
+    xclip # manipulate the clipboard from the command line
+    xlockmore # screen locker
+    xorg.xev # print x event ids
   ];
 
   fonts.fonts = with pkgs; [
@@ -27,7 +43,6 @@
 # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.layout = "us";
-  services.xserver.videoDrivers = [ "nvidia" ];
 
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.gnome3.enable = true;

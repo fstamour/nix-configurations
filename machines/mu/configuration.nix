@@ -15,6 +15,7 @@
 
 # For nvidia graphic card drivers
   nixpkgs.config.allowUnfree = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
 
 # Enable PulseAudio.
   hardware.pulseaudio.enable = true;
@@ -31,10 +32,14 @@
 # Enable support for SANE scanners
   hardware.sane.enable = true;
 
+# Configure console
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+  };
+
 # Select internationalisation properties.
   i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
     defaultLocale = "en_US.UTF-8";
 # Provide Japanese Input. Why not?
     inputMethod.ibus.engines = [ pkgs.ibus-anthy pkgs.mozc ];
@@ -69,8 +74,20 @@
 
 # Network security
   networking.firewall.allowPing = true;
-  networking.firewall.allowedTCPPorts = [ 445 139 7777 ];
-  networking.firewall.allowedUDPPorts = [ 137 138 7777 ];
+  networking.firewall.allowedTCPPorts = [
+    # smb & netbiod
+    445 139
+    # steam
+    7777
+    # for web development
+    8080
+  ];
+  networking.firewall.allowedUDPPorts = [
+    # netbios
+    137 138
+    # steam
+    7777
+  ];
 
   networking.hostName = "mu"; # Define your hostname.
   networking.hostId = "D40F09C6";  # Random 32-bit identifier
@@ -78,6 +95,8 @@
   environment.variables = {
     EDITOR = "vim";
   };
+
+  environment.homeBinInPath = true;
 
   programs = {
     bash.enableCompletion = true;
@@ -110,7 +129,7 @@
     system.stateVersion = "18.09";
     system.autoUpgrade = {
       enable = true;
-      channel = https://nixos.org/channels/nixos-19.03;
+      channel = https://nixos.org/channels/nixos-20.03;
     };
 
 # Virtualisation
@@ -122,3 +141,4 @@
     hardware.opengl.driSupport32Bit = true;
     hardware.pulseaudio.support32Bit = true;
 }
+
