@@ -24,8 +24,7 @@ for machine in epsilon mu potable; do
 	  run cp -r $(find /etc/nixos/ -name '*.nix' | \
 		  grep -v $hard) $machine/
   else
-    run rsync --include='*.nix' --exclude $hard \
-	    -vr ${machine}:/etc/nixos/ ${machine}/
+    run rsync --exclude=$hard -vr ${machine}:/etc/nixos/ ${machine}/
 
   fi
 done
