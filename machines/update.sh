@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # make sure there aren't any pending changes in the repository
-git diff-index --quiet HEAD -- || (echo "Please take care of any changes in the repository." && exit)
+git diff-index --quiet HEAD -- || \
+       	(echo "Please take care of any changes in the repository." && exit)
 
 function run() {
   echo $*
@@ -15,12 +16,17 @@ function header() {
   echo ===================================================
 }
 
+# just to make stuff shorter
+hard=hardware-configuration.nix 
 for machine in epsilon mu potable; do
   header $machine
   if [ $machine = $(hostname) ]; then
-    run cp -r /etc/nixos/* $machine/
+	  run cp -r $(find /etc/nixos/ -name '*.nix' | \
+		  grep -v $hard) $machine/
   else
-    run rsync -vr ${machine}:/etc/nixos/ ${machine}/
+    run rsync --include='*.nix' --exclude $hard \
+	    -vr ${machine}:/etc/nixos/ ${machine}/
+
   fi
 done
 
