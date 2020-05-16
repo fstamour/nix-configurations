@@ -2,6 +2,13 @@
 {
   hardware.opengl.enable = true;
 
+  # Install pulseaudio explicitly to have sound with stumpwm
+  hardware.pulseaudio = {
+    enable = true;
+    # for steam
+    support32Bit = true;
+  };
+
   environment.systemPackages = with pkgs; [
     anki # space-repetition something, I forgot...
     arandr # display layout tool
@@ -68,3 +75,4 @@
   };
   # services.xserver.displayManager.sddm.enable = true; # alternative (I've had problems with gdm)
 }
+

@@ -8,17 +8,9 @@
 # Include the results of the hardware scan.
   imports = [
     ./hardware-configuration.nix
+    ./common/configuration.nix
     ./cuda.nix
-    ./packages.nix
-    ./common/x11.nix
   ];
-
-# For nvidia graphic card drivers
-  nixpkgs.config.allowUnfree = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-# Enable PulseAudio.
-  hardware.pulseaudio.enable = true;
 
 # Use the gummiboot efi boot loader.
   boot = {
@@ -29,50 +21,7 @@
     resumeDevice = "/swapfile";
   };
 
-# Enable support for SANE scanners
-  hardware.sane.enable = true;
-
-# Configure console
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "us";
-  };
-
-# Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-# Provide Japanese Input. Why not?
-    inputMethod.ibus.engines = [ pkgs.ibus-anthy pkgs.mozc ];
-  };
-
-# Set your time zone.
-  time.timeZone = "America/Montreal";
-
-
-# List services that you want to enable:
-  services = {
-# Enable the OpenSSH daemon.
-    openssh = {
-      enable = true;
-      passwordAuthentication = false;
-    };
-
-# Windows share access
-    samba = {
-      enable = true;
-      nsswins = true;
-    };
-
-# Synchting
-    syncthing = {
-      enable = true;
-      user = "mpsyco";
-      dataDir = "/home/mpsyco/.config/syncthing";
-      openDefaultPorts = true;
-    };
-  };
-
-# Network security
+# Networking
   networking.firewall.allowPing = true;
   networking.firewall.allowedTCPPorts = [
     # smb & netbiod
@@ -92,50 +41,20 @@
   networking.hostName = "mu"; # Define your hostname.
   networking.hostId = "D40F09C6";  # Random 32-bit identifier
 
-  environment.variables = {
-    EDITOR = "vim";
-  };
+# For nvidia graphic card drivers
+  services.xserver.videoDrivers = [ "nvidia" ];
 
-  environment.homeBinInPath = true;
+# Enable support for SANE scanners
+  hardware.sane.enable = true;
 
-  programs = {
-    bash.enableCompletion = true;
-    fish.enable = true;
-    ssh = {
-      startAgent = true;
-    };
-  };
-
-  users.defaultUserShell = "/run/current-system/sw/bin/fish";
-
-# Define a user account. Don't forget to set a password with ‘passwd’.
-  users.extraUsers.mpsyco = {
-    createHome = true;
-    home = "/home/mpsyco";
-    isNormalUser = true;
-    extraGroups = [
-      "wheel" # Sudo rights
-      "dialout" # In order to access /dev/ttyUSBx for hardware dev.
-      "docker"
-      "wireshark"
-      "cdrom" # for burning cd
-      "scanner"
-      "lp" # printer
-    ];
-    uid = 1000;
-  };
+# Packages specific to "mu"
+  environment.systemPackages = with pkgs; [
+    # Specific to "mu"
+    refind # efi boot loader
+  ];
 
 # The NixOS release to be compatible with for stateful data such as databases.
     system.stateVersion = "18.09";
-    system.autoUpgrade = {
-      enable = true;
-      channel = https://nixos.org/channels/nixos-20.03;
-    };
-
-# Virtualisation
-    virtualisation.libvirtd.enable = true;
-    virtualisation.virtualbox.host.enable = true;
-    virtualisation.docker.enable = true;
 
 # For steam
     hardware.opengl.driSupport32Bit = true;
