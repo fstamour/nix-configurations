@@ -1,7 +1,7 @@
-
 { config, pkgs, ... }:
-
 {
+  hardware.opengl.enable = true;
+
   environment.systemPackages = with pkgs; [
     anki # space-repetition something, I forgot...
     arandr # display layout tool
@@ -16,7 +16,6 @@
     keepassx2 # password manager
     libreoffice # office suite
     lxappearance # tweak gtk theme (appearance)
-    pavucontrol # audio control
     pavucontrol # sound settings
     shutter # for screenshots
     stumpish
@@ -42,9 +41,30 @@
 
 # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.layout = "us";
 
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.gnome3.enable = true;
+  ## Keyboard
+  services.xserver.layout = "us";
+  # Use CapsLock as a compose key
+  services.xserver.xkbOptions = "compose:caps";
+
+  # services.xserver.desktopManager.gnome3.enable = true;
   services.xserver.windowManager.stumpwm.enable = true;
+  services.xserver.displayManager.defaultSession = "none+stumpwm";
+
+  services.compton = {
+    enable = true;
+    shadow = true;
+    shadowOpacity = "0.5";
+    inactiveOpacity = "1.0";
+    fade = true;
+    fadeDelta = 5; # in ms, default is 10
+    vSync = true;
+  };
+
+  # Login screen
+  services.xserver.displayManager.gdm = {
+     enable = true;
+     wayland = false; # because nvidia drivers doesn't support wayland
+  };
+  # services.xserver.displayManager.sddm.enable = true; # alternative (I've had problems with gdm)
 }

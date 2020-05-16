@@ -1,4 +1,4 @@
-﻿# the NixOS manual is accessible by running ‘nixos-help’.
+# the NixOS manual is accessible by running ‘nixos-help’.
 
 { config, pkgs, lib, ... }:
 
@@ -8,6 +8,7 @@
       ./hardware-configuration.nix
       ./packages.nix
       ./x11.nix
+      ./x11-potable.nix
       ./mpd.nix
     ];
 
@@ -96,11 +97,13 @@
     install = true;
   };
 
+  # Not tested yet
   # config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "factorio"
     "factorio-headless"
     "kindlegen"
+    # "nvidia-x11-440.82-5.4.35"
     "nvidia-x11"
     "nvidia-settings"
     "nvidia-persistenced"
