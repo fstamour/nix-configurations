@@ -1,4 +1,5 @@
 #!/bin/sh
 
-sudo rsync -rL $(hostname)/ /etc/nixos/
+sudo rsync --include='*.nix' -rL $(hostname)/ /etc/nixos/
+sudo nixos-rebuild switch
 
