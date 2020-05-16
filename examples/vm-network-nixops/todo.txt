@@ -1,0 +1,8 @@
+https://github.com/NixOS/nixpkgs/tree/master/nixos/modules/services/search
+[ ] Create an elasticsearch system
+[ ] Create a gitlab server
+[ ] Integrate the git server with jenkins
+[ ] Integrate the git server with kerberos
+[ ] Integrate the git server with elasticsearch
+[ ] Fiddle with kibana
+[ ] Maybe even fiddle with "hound" search
