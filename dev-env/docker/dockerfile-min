@@ -1,0 +1,9 @@
+FROM lnl7/nix:2.3.3
+
+RUN nix-env -i git
+
+RUN mkdir /repository
+WORKDIR /repository
+RUN git init
+COPY ./git git
+

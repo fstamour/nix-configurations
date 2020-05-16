@@ -1,0 +1,14 @@
+# This is an alpine-based image with nix installed on it.
+
+FROM nixos/nix
+
+RUN nix-channel --add https://nixos.org/channels/nixos-19.09 nixos
+RUN nix-channel --update
+
+RUN nix-env -i git
+
+RUN mkdir /repository
+WORKDIR /repository
+RUN git init
+COPY ./git git
+
