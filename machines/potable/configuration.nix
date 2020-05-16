@@ -1,18 +1,23 @@
-# the NixOS manual is accessible by running ‘nixos-help’.
+﻿# the NixOS manual is accessible by running ‘nixos-help’.
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./packages.nix
+      ./x11.nix
       ./mpd.nix
     ];
 
-  hardware.opengl.driSupport32Bit = true;
+  # for steam
+  # hardware.opengl.driSupport32Bit = true;
+
   # Install pulseaudio explicitly to have sound with stumpwm
   hardware.pulseaudio = {
     enable = true;
+    # for steam
     support32Bit = true;
   };
 
@@ -39,46 +44,7 @@
   # Set your time zone.
   time.timeZone = "America/Montreal";
 
-  # For nvidia's proprietary drivers.
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-    # Command line goodies
-    bat # file viewer
-    fd # alternative to "find"
-    file # determine file type
-    fish # friendly shell
-    fzf # fuzzy finder
-    gitAndTools.gitFull
-    htop # process viewer
-    moreutils # sponge, ts, etc
-    pv # pipe viewer
-    ranger # file explorer
-    ripgrep # find in file
-    rlwrap # for shell that doesn't have readline (e.g. sbcl)
-    screen # terminal multiplexer
-    tig # text-mode interface for git
-    tmux # terminal multiplexer
-    tree # ls in tree-like format
-    unzip
-    w3m # terminal web browser
-    wget # download stuff
-  ] ++ [
-    # Windows interop
-    ntfs3g # In order to mount NTFS with rw
-  ] ++ [
-    # Editors
-    emacs
-    kakoune # alternative to vim
-    vim
-  ] ++ [
-    # Diagnostic tools
-    lsof # to find which process has which file opened
-    usbutils # e.g. list usb devices
-    bind # e.g. nslookup
-  ];
+  environment.homeBinInPath = true;
 
   programs = {
     bash.enableCompletion = true;
@@ -90,42 +56,6 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "nvidia" ];
-    layout = "us";
-    # this is incompatible with gnome, but the trackpad doesn't work without it in with stumpwm, go figure
-    synaptics.enable = true;
-    # libinput.enable = true;
-    exportConfiguration = true;
-  };
-
-  services.compton = {
-    enable = true;
-
-    shadow = true;
-    shadowOpacity = "0.5";
-    inactiveOpacity = "1.0";
-    fade = true;
-    fadeDelta = 5; # in ms, default is 10
-    vSync = true;
-  };
-
-  # Use CapsLock as a compose key
-  services.xserver.xkbOptions = "compose:caps";
-
-  # Login screen
-  services.xserver.displayManager.gdm = {
-    enable = true;
-    wayland = false; # because nvidia drivers doesn't support wayland
-  };
-  # services.xserver.displayManager.sddm.enable = true; # alternative (I've had problems with gdm)
-
-  # Window/Desktop manager
-  # services.xserver.desktopManager.gnome3.enable = true;
-  services.xserver.windowManager.stumpwm.enable = true;
 
   # Enable power management service
   services.tlp.enable = true;
@@ -149,6 +79,7 @@
       "networkmanager"
       "power"
       "docker"
+      "lxd"
       "adbusers" # android develpment
     ];
   };
@@ -157,7 +88,7 @@
   system.stateVersion = "19.03";
   system.autoUpgrade = {
     enable = true;
-    channel = https://nixos.org/channels/nixos-19.03;
+    channel = https://nixos.org/channels/nixos-20.03;
   };
 
   services.emacs = {
@@ -165,11 +96,20 @@
     install = true;
   };
 
-  # Not tested yet
+  # config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "factorio"
+    "factorio-headless"
+    "kindlegen"
+    "nvidia-x11"
+    "nvidia-settings"
+    "nvidia-persistenced"
+  ];
   services.factorio = {
     enable = true;
   };
 
   virtualisation.virtualbox.host.enable = true;
   virtualisation.docker.enable = true;
+  virtualisation.lxd.enable = true;
 }
