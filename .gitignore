@@ -1,0 +1,3 @@
+# Oftentimes, I list packages I have installed with `nix-env -i` in a file,
+# but I don't want to commit that.
+installed
