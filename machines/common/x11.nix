@@ -23,6 +23,7 @@
     keepassx2 # password manager
     libreoffice # office suite
     lxappearance # tweak gtk theme (appearance)
+    mupdf # minimal pdf viewer + bunch of tools
     pavucontrol # sound settings
     shutter # for screenshots
     stumpish
