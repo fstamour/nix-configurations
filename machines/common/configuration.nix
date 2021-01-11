@@ -104,7 +104,7 @@
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
     "factorio"
     "factorio-headless"
-    "kindlegen"
+    # "kindlegen"
     "nvidia-x11"
     "nvidia-settings"
     "nvidia-persistenced"
