@@ -63,8 +63,8 @@
   services.compton = {
     enable = true;
     shadow = true;
-    shadowOpacity = "0.5";
-    inactiveOpacity = "1.0";
+    shadowOpacity = 0.5;
+    inactiveOpacity = 1.0;
     fade = true;
     fadeDelta = 5; # in ms, default is 10
     vSync = true;
