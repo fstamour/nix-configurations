@@ -51,8 +51,9 @@
     pv # pipe viewer, useful with dd
     usbutils # e.g. list usb devices
   ] ++ [
-    # Windows interop
+    # File system
     ntfs3g # In order to mount NTFS with rw
+    exfat
   ] ++ [
     # Spell checker and dictionaries
     hunspell
