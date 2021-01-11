@@ -18,7 +18,6 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    resumeDevice = "/swapfile";
   };
 
 # Networking
