@@ -13,7 +13,7 @@
     anki # space-repetition something, I forgot...
     arandr # display layout tool
     baobab # like WinDirStat for linux
-    calibre kindlegen # ebook tools
+    calibre # kindlegen # ebook tools
     chromium # shiny web browser
     copyq # clipboard manager
     dmenu # dynamic menu
