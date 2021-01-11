@@ -56,7 +56,9 @@
   # Use CapsLock as a compose key
   services.xserver.xkbOptions = "compose:caps";
 
-  # services.xserver.desktopManager.gnome3.enable = true;
+  # from gnome, I use nautilus (the file manager) and all it's niceties to
+  # mount file systems
+  services.xserver.desktopManager.gnome3.enable = true;
   services.xserver.windowManager.stumpwm.enable = true;
   services.xserver.displayManager.defaultSession = "none+stumpwm";
 
