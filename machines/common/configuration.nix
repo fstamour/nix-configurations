@@ -6,6 +6,7 @@
 
 {
   imports = [
+    ./networking.nix
     ./packages.nix
     ./x11.nix
   ];
