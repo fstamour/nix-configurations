@@ -9,6 +9,7 @@
     ./networking.nix
     ./packages.nix
     ./x11.nix
+    ./others.nix
   ];
 
   # For development
