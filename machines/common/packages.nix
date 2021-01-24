@@ -5,7 +5,6 @@
   environment.systemPackages = with pkgs; [
     # Basic utilities
     bc # basic calculator
-    emacs # mini-os
     file # determine file type
     fish # friendly interactive shell
     gitAndTools.gitFull
@@ -15,11 +14,9 @@
     tig # text-mode interface for git
     tmux # terminal multiplexer
     tree # list files
-    unzip
-    vim # editor
+    zip unzip
     w3m # terminal web browser
     wget # alternative to curl
-    zip
   ] ++ [
     # Editors
     emacs
@@ -35,6 +32,7 @@
   ] ++ [
     # fancy command line tools
     bat # show files
+    entr # file watcher
     fd # alternative to "find"
     fzf # fuzzy finder
     pv # pipe viewer
@@ -74,7 +72,7 @@
     # formal methods
     tlaplusToolbox
     tetex # for pretty-printing TLA specs
-    
+
     # clojure
     boot
     clojure
@@ -96,6 +94,10 @@
     gdb
     ctags
     cmake
+
+    # multimedia
     youtube-dl # download stuff from youtube
+    imagemagick
+    sox # swiss-army knife for audio
   ];
 }
