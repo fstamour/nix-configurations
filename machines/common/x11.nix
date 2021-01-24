@@ -11,6 +11,7 @@
 
   environment.systemPackages = with pkgs; [
     anki # space-repetition something, I forgot...
+    alacritty # fast terminal emulator
     arandr # display layout tool
     baobab # like WinDirStat for linux
     calibre # kindlegen # ebook tools
@@ -18,6 +19,7 @@
     copyq # clipboard manager
     dmenu # dynamic menu
     evince # document viewer
+    mate.eom # eye-of-mate, image
     firefox # foxy web browser
     freemind # mind map
     freerdp # remote desktop (gui)
