@@ -64,7 +64,7 @@ gifsicle
 
 #* nixos.gitlab-runner (gitlab-runner)
 #  GitLab Runner the continuous integration executor of GitLab
-gitlab
+gitlab-runner
 
 #* nixos.gmpc (gmpc)
 #  A GTK2 frontend for Music Player Daemon
@@ -257,5 +257,55 @@ xchm
 #* nixos.xclip (xclip)
 #  Tool to access the X clipboard from a console application
 xclip 
+
+
+
+android-studio
+arduino
+avr8burnomat
+borgbackup
+clementine
+dejagnu
+discord
+
+cl-launch
+clasp
+ecl
+lispPackages.quicklisp
+
+ffmpeg
+fim
+fritzing
+gforth
+gmpc
+goldendict
+handbrake
+heroku
+jdupes
+jp2a
+lmms
+lxappearance
+mediainfo
+mopidy
+mpd
+mucommander
+p7zip
+samba
+shellcheck
+skim
+st
+steam
+stow
+teamviewer
+termtosvg
+travis
+usbutils
+viu
+
+dosbox
+wine
+winetricks
+xlayoutdisplay
+
   ];
 }

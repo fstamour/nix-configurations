@@ -111,6 +111,12 @@
     "nvidia-settings"
     "nvidia-persistenced"
     "cudatoolkit"
+    "android-studio-stable"
+    "discord"
+    "steam"
+    "steam-original"
+    "steam-runtime"
+    "teamviewer"
   ];
 }
 
