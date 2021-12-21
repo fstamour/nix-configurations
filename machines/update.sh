@@ -17,8 +17,8 @@ function header() {
 }
 
 # just to make stuff shorter
-hard=hardware-configuration.nix 
-for machine in epsilon mu potable; do
+hard=hardware-configuration.nix
+for machine in epsilon mu; do
   header $machine
   if [ $machine = $(hostname) ]; then
 	  run cp -r $(find /etc/nixos/ -name '*.nix' | \
