@@ -54,7 +54,9 @@
 
 # Don't turn off the screen
   environment.extraInit = ''
-    xset s off -dpms
+    if [[ ! $(tty >/dev/null) ]] && [ -n "$DISPLAY" ] ; then
+      xset s off -dpms
+    fi
   '';
 
 # The NixOS release to be compatible with for stateful data such as databases.
@@ -64,4 +66,3 @@
     hardware.opengl.driSupport32Bit = true;
     hardware.pulseaudio.support32Bit = true;
 }
-

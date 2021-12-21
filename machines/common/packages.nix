@@ -20,10 +20,9 @@
   ] ++ [
     # Editors
     emacs
-    kakoune # alternative to vim
-    vim
+    # vim
   ] ++ [
-    # TODO Move to a nono-cmooon file
+    # TODO Move to a non-common file
     # Specific to "mu"
     refind # efi boot loader
   ] ++ [

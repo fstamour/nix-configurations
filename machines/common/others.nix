@@ -20,7 +20,7 @@ antimony
 
 #* nixos.aqemu (aqemu)
 #  A virtual machine manager GUI for qemu
-aqemu 
+# aqemu # TODO Marked as broken in 2021.05
 
 #* nixos.audacity (audacity)
 #  Sound editor with graphical UI
