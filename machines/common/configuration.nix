@@ -10,6 +10,7 @@
     ./packages.nix
     ./x11.nix
     ./others.nix
+    ./printer.nix
   ];
 
   # For development
@@ -119,4 +120,3 @@
     "teamviewer"
   ];
 }
-
