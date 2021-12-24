@@ -42,15 +42,11 @@
 
 # For nvidia graphic card drivers
   services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+
 
 # Enable support for SANE scanners
   hardware.sane.enable = true;
-
-# Packages specific to "mu"
-  environment.systemPackages = with pkgs; [
-    # Specific to "mu"
-    refind # efi boot loader
-  ];
 
 # Don't turn off the screen
   environment.extraInit = ''

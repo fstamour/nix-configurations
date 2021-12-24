@@ -17,17 +17,11 @@
     zip unzip
     w3m # terminal web browser
     wget # alternative to curl
+    unixtools.xxd # hex viewer (and more)
   ] ++ [
     # Editors
     emacs
     # vim
-  ] ++ [
-    # TODO Move to a non-common file
-    # Specific to "mu"
-    refind # efi boot loader
-  ] ++ [
-    # Inspection and diagnotic tools
-    bind # e.g. nslookup
   ] ++ [
     # fancy command line tools
     bat # show files
@@ -45,6 +39,7 @@
     htop # process viewer
     iotop
     lsof # to find which process has which file opened
+    pciutils # for lspci (to list PCI cards)
     pv # pipe viewer, useful with dd
     usbutils # e.g. list usb devices
   ] ++ [
