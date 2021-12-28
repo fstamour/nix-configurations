@@ -29,6 +29,8 @@
     7777
     # for web development
     8080
+    # for myelin
+    4242
   ];
   networking.firewall.allowedUDPPorts = [
     # netbios

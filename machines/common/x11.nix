@@ -18,6 +18,7 @@
     copyq # clipboard manager
     dmenu # dynamic menu
     evince # document viewer
+    feh # image viewer
     mate.eom # eye-of-mate, image
     firefox # foxy web browser
     freemind # mind map

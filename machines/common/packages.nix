@@ -5,6 +5,7 @@
   environment.systemPackages = with pkgs; [
     # Basic utilities
     bc # basic calculator
+    dos2unix # end-of-line converter
     file # determine file type
     fish # friendly interactive shell
     gitAndTools.gitFull
@@ -28,6 +29,7 @@
     entr # file watcher
     fd # alternative to "find"
     fzf # fuzzy finder
+    jq # cli JSON processor
     pv # pipe viewer
     ranger # file explorer
     ripgrep # find in files
@@ -39,6 +41,7 @@
     htop # process viewer
     iotop
     lsof # to find which process has which file opened
+    nmap # network discovery and security auditing
     pciutils # for lspci (to list PCI cards)
     pv # pipe viewer, useful with dd
     usbutils # e.g. list usb devices
@@ -54,6 +57,8 @@
     hunspellDicts.en-gb-ize
     hunspellDicts.en-us
     hunspellDicts.es-cu
+    # dictionnary, thesaurus and more. commands: wn and wnb
+    wordnet
   ] ++ [
     # machine learning
     octave
@@ -79,8 +84,9 @@
 
     # lisp
     abcl
-    ecl
     ccl
+    clasp
+    ecl
     sbcl
 
     # general
@@ -93,5 +99,15 @@
     youtube-dl # download stuff from youtube
     imagemagick
     sox # swiss-army knife for audio
+    handbrake
+
+    # CAD and media
+    audacity #  Sound editor with graphical UI
+    blender
+    freecad
+    kicad
+    inkscape
+    gimp
+    gifsicle # cli for gifs
   ];
 }
