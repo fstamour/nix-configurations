@@ -50,12 +50,12 @@
 # Enable support for SANE scanners
   hardware.sane.enable = true;
 
-# Don't turn off the screen
-  environment.extraInit = ''
-    if [[ ! $(tty >/dev/null) ]] && [ -n "$DISPLAY" ] ; then
-      xset s off -dpms
-    fi
-  '';
+# # Don't turn off the screen
+#   environment.extraInit = ''
+#     if [[ ! $(tty >/dev/null) ]] && [ -n "$DISPLAY" ] ; then
+#       xset s off -dpms
+#     fi
+#   '';
 
 # The NixOS release to be compatible with for stateful data such as databases.
     system.stateVersion = "18.09";

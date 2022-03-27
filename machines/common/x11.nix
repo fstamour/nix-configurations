@@ -28,7 +28,7 @@
     lxappearance # tweak gtk theme (appearance)
     mupdf # minimal pdf viewer + bunch of tools
     pavucontrol # sound settings
-    shutter # for screenshots
+    flameshot # for screenshots
     stumpish
     termite # terminal emulator
     vlc # media player
