@@ -38,6 +38,7 @@
     openssh = {
       enable = true;
       passwordAuthentication = false;
+      forwardX11 = true;
     };
 
 # Windows share access
@@ -72,6 +73,7 @@
     ssh = {
       startAgent = true;
     };
+    mosh.enable = true;
   };
 
   users.defaultUserShell = "/run/current-system/sw/bin/fish";
