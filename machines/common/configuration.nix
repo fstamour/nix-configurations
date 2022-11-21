@@ -78,6 +78,17 @@
 
   users.defaultUserShell = "/run/current-system/sw/bin/fish";
 
+  users.groups = {
+    # On Arch Linux the group uucp is used for "Serial and USB devices
+    # such as modems, handhelds, RS-232/serial ports"
+    uucp = {};
+  };
+
+  services.udev.extraRules = ''
+    # Set group for USBTinyISP
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="1781", ATTRS{idProduct}=="0c9f", GROUP="uucp"
+  '';
+
 # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.mpsyco = {
     createHome = true;
@@ -95,6 +106,7 @@
       "scanner"
       "wheel" # sudoer
       "wireshark"
+      "uucp" # for USBTinyISP
     ];
     uid = 1000;
   };
