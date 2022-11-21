@@ -9,7 +9,7 @@
   imports = [
     ./hardware-configuration.nix
     ./common/configuration.nix
-    ./cuda.nix
+    # ./cuda.nix
   ];
 
 # Use the gummiboot efi boot loader.

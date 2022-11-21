@@ -9,7 +9,7 @@
     ./networking.nix
     ./packages.nix
     ./x11.nix
-    ./others.nix
+    # ./others.nix
     ./printer.nix
   ];
 
@@ -105,18 +105,22 @@
 
 # Allow _some_ unfree package
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-    "factorio"
-    "factorio-headless"
+    # "factorio"
+    # "factorio-headless"
     # "kindlegen"
     "nvidia-x11"
     "nvidia-settings"
     "nvidia-persistenced"
-    "cudatoolkit"
+    # "cudatoolkit"
     "android-studio-stable"
-    "discord"
+    # "discord"
     "steam"
     "steam-original"
     "steam-runtime"
-    "teamviewer"
+    # "teamviewer"
   ];
+
+  # because some things are more up-to-date when using flatpak
+  # like anki and steam
+  services.flatpak.enable = true;
 }

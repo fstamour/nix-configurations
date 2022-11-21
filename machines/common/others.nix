@@ -22,10 +22,6 @@ antimony
 #  A virtual machine manager GUI for qemu
 # aqemu # TODO Marked as broken in 2021.05
 
-#* nixos.colordiff (colordiff)
-#  Wrapper for 'diff' that produces the same output but with pretty 'syntax' highlighting
-colordiff
-
 #* nixos.cypress (cypress)
 #  Fast, easy and reliable testing for anything that runs in a browser
 cypress
@@ -104,19 +100,11 @@ mailutils
 
 #* nixos.metasploit (metasploit-framework)
 #  Metasploit Framework - a collection of exploits
-metasploit
+# metasploit
 
 #* nixos.guardian-agent (guardian-agent-0.7.2)
 #  Secure ssh-agent forwarding for Mosh and SSH
 guardian-agent
-
-#* nixos.mosh (mosh)
-#  Mobile shell (ssh replacement)
-mosh
-
-#* nixos.nix-prefetch (nix-prefetch)
-#  Prefetch any fetcher function call, e.g. package sources
-nix
 
 #* nixos.openjdk (openjdk-8u222-ga)
 #  The open-source Java Development Kit
@@ -130,17 +118,12 @@ polybar
 #  Show the set of running processes as a tree
 pstree
 
-#* nixos.deluge (python2.7-deluge)
-#  Torrent client
-deluge
-
 #* nixos.qrcode (qrcode-git)
 #  A small QR-code tool
 qrcode
 
 #* nixos.simplescreenrecorder (simplescreenrecorder)
 #  A screen recorder for Linux
-simplescreenrecorder
 
 #* nixos.socat (socat)
 #  A utility for bidirectional data transfer between two independent data channels
@@ -166,26 +149,6 @@ ssdeep
 #  Free open-source planetarium
 stellarium
 
-#* nixos.stumpish (stumpish)
-#  STUMPwm Interactive SHell
-stumpish
-
-#* nixos.syncthing-cli (syncthing-cli)
-#  Open Source Continuous File Synchronization
-syncthing
-
-#* nixos.syncthing-discovery (syncthing-discovery)
-#  Open Source Continuous File Synchronization
-syncthing
-
-#* nixos.syncthing-relay (syncthing-relay)
-#  Open Source Continuous File Synchronization
-syncthing
-
-#* nixos.syncthing-tray (syncthing-tray)
-#  Simple application tray for syncthing
-syncthing
-
 #* nixos.taskopen (taskopen-1.1.4)
 #  Script for taking notes and open urls with taskwarrior
 taskopen
@@ -198,10 +161,6 @@ taskserver
 #  REPL for taskwarrior
 tasksh
 
-#* nixos.taskwarrior (taskwarrior)
-#  Highly flexible command-line tool to manage TODO lists
-taskwarrior
-
 #* nixos.warzone2100 (warzone2100)
 #  A free RTS game, originally developed by Pumpkin Studios
 warzone2100
@@ -210,18 +169,9 @@ warzone2100
 #  A fast, light and extensible chat client
 weechat
 
-#* nixos.weka (weka)
-#  Collection of machine learning algorithms for data mining tasks
-weka
-
 #* nixos.xchm (xchm)
 #  A viewer for Microsoft HTML Help files
 xchm
-
-#* nixos.xclip (xclip)
-#  Tool to access the X clipboard from a console application
-xclip
-
 
 
 android-studio
@@ -231,31 +181,30 @@ avr8burnomat
 borgbackup
 clementine
 dejagnu
-discord
 
-cl-launch
-lispPackages.quicklisp
 
-ffmpeg
+
 fim
 fritzing
 gforth
 gmpc
+
 goldendict
+
 heroku
 jdupes
 jp2a
 lmms
-lxappearance
+
 mediainfo
 mopidy
 mpd
-mucommander
+# mucommander # doesn't build on 22.05
 p7zip
 samba
 shellcheck
 skim
-steam
+#steam
 stow
 teamviewer
 termtosvg

@@ -3,8 +3,10 @@
 {
 # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
-    # Basic utilities
+
+    ### Basic utilities
     bc # basic calculator
+    colordiff # diff, with colors!!
     dos2unix # end-of-line converter
     file # determine file type
     fish # friendly interactive shell
@@ -19,12 +21,11 @@
     w3m # terminal web browser
     wget # alternative to curl
     unixtools.xxd # hex viewer (and more)
-  ] ++ [
-    # Editors
+
+    ### Editor
     emacs
-    # vim
-  ] ++ [
-    # fancy command line tools
+
+    ### fancy command line tools
     bat # show files
     entr # file watcher
     fd # alternative to "find"
@@ -35,8 +36,8 @@
     ripgrep # find in files
     rlwrap # for shell that doesn't have readline (e.g. sbcl)
     taskwarrior # todo manager
-  ] ++ [
-    # Inspection and diagnotic tools
+
+    ### Inspection and diagnotic tools
     bind # e.g. nslookup
     htop # process viewer
     iotop
@@ -45,12 +46,16 @@
     pciutils # for lspci (to list PCI cards)
     pv # pipe viewer, useful with dd
     usbutils # e.g. list usb devices
-  ] ++ [
-    # File system
+
+    ### File system
     ntfs3g # In order to mount NTFS with rw
     exfat
-  ] ++ [
-    # Spell checker and dictionaries
+    gptfdisk
+
+    ### Admin stuff
+    borgbackup
+
+    ### Spell checker and dictionaries
     hunspell
     hunspellDicts.fr-moderne
     hunspellDicts.fr-any
@@ -59,55 +64,61 @@
     hunspellDicts.es-cu
     # dictionnary, thesaurus and more. commands: wn and wnb
     wordnet
-  ] ++ [
-    # machine learning
-    octave
-    tesseract
 
-    # constaint programming
-    minizinc
-    gecode
+    ### machine learning
+    # octave
+    # tesseract
+    # weka # Collection of machine learning algorithms for data mining tasks
+    # autoweka?
 
-    # formal methods
-    tlaplusToolbox
-    tetex # for pretty-printing TLA specs
+    ### constraint programming
+    #minizinc
+    #gecode
 
+    ### formal methods
+    #tlaplusToolbox
+    #tetex # for pretty-printing TLA specs
+
+    ### clojure
+    # boot
     # clojure
-    boot
-    clojure
 
-    # rust
-    cargo
+    ### rust
+    # cargo
 
-    # javascript
-    nodejs
+    ### javascript
+    # nodejs
 
-    # lisp
-    abcl
-    ccl
-    clasp
-    ecl
-    sbcl
+    ### lisp
+    # abcl
+    # ccl
+    # clasp
+    # ecl
+    # sbcl
+    # cl-launch
+    # lispPackages.quicklisp
 
-    # general
-    gnumake
-    gdb
-    ctags
-    cmake
 
-    # multimedia
+    ### general
+    # gnumake
+    # gdb
+    # ctags
+    # cmake
+
+    ### multimedia
     youtube-dl # download stuff from youtube
-    imagemagick
-    sox # swiss-army knife for audio
-    handbrake
+    #imagemagick
+    #sox # swiss-army knife for audio
+    #handbrake
+    ffmpeg
 
-    # CAD and media
-    audacity #  Sound editor with graphical UI
-    blender
-    freecad
+    ### CAD and media authoring
+    #audacity #  Sound editor with graphical UI
+    #blender
+    #freecad
     kicad
     inkscape
     gimp
-    gifsicle # cli for gifs
+    #gifsicle # cli for gifs
   ];
 }
