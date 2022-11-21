@@ -56,7 +56,7 @@
   };
 
   environment.variables = {
-    EDITOR = "vim";
+    EDITOR = "emacsclient -c -a emacs";
   };
 
   environment.systemPackages = with pkgs; [
