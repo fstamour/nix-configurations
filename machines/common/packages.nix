@@ -36,6 +36,7 @@
     ripgrep # find in files
     rlwrap # for shell that doesn't have readline (e.g. sbcl)
     taskwarrior # todo manager
+    direnv # unclutter your enviroment
 
     ### Inspection and diagnotic tools
     bind # e.g. nslookup
